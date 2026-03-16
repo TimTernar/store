@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+</head>
+
+<body>
+
+<h2>Products</h2>
+
+<ul id="productList"></ul>
+
+<script>
+  fetch("/productsFull")
+  .then(response => response.json())
+  .then(products => {
+
+      let list = document.getElementById("productList");
+
+      products.forEach(product => {
+
+          let li = document.createElement("li");
+          li.textContent = product.name + " - " + product.price + "€";
+
+          list.appendChild(li);
+
+      });
+
+  });
+</script>
+</body>
+</html>
