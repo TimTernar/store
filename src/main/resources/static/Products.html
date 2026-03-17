@@ -28,6 +28,13 @@
       });
 
   });
+
+  fetch("/productsAdd")
+  .then(response => response.json())
+  .then(products => {
+
+       let list = document.getElementById("productList");
+
 </script>
 </body>
 </html>
