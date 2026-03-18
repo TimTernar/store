@@ -8,45 +8,24 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductRepository repository;
+    private final ProductService productService;
 
-    public ProductController(ProductRepository repository) {
-        this.repository = repository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return repository.findAll();
-    }
-
-    //najdi posebej
-    @GetMapping("/{id}")
-    public Product getOneProduct(@PathVariable String id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Product not found: " + id));
+        return productService.getAllProducts();
     }
 
     @PostMapping
-    public Product newProduct(@RequestBody Product newProduct) {
-        return repository.save(newProduct);
-    }
-
-    @PutMapping("/{id}")
-    public Product replaceProduct(@RequestBody Product newProduct, @PathVariable String id) {
-        return repository.findById(id)
-                .map(product -> {
-                    product.setName(newProduct.getName());
-                    product.setPrice(newProduct.getPrice());
-                    return repository.save(product);
-                })
-                .orElseGet(() -> {
-                    newProduct.setId(id);
-                    return repository.save(newProduct);
-                });
+    public Product addProduct(@RequestBody Product product) {
+        return productService.addProduct(product);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDocument(@PathVariable String id)
-    {
-        repository.deleteById(id);
+    public void deleteProduct(@PathVariable String id) {
+        productService.deleteProduct(id);
     }
 }
