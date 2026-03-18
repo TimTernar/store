@@ -13,13 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProductController {
 
-    /*
-    @GetMapping("/products")
-    public List<String> getProducts() {
-        return List.of("Kava", "Čaj", "Mleko");
-    }
-     */
-
     private final ProductRepository repository;
 
     ProductController(ProductRepository repository)
@@ -27,17 +20,26 @@ public class ProductController {
         this.repository = repository;
     }
 
-
+    //od kad me ne ljubiš više
+    //u meni liju kiše
+    //i kad je sunčan dan
+    //all
     @GetMapping("/productsFull")
     public List<Product> getProcutsFull(){
         return repository.findAll();
     }
 
-    /*
+
+    //get one by id
     @GetMapping("/productsOne/{id}")
-    public Product getProducts()
+    Product One(@PathVariable Long id)
     {
-        return prod
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
     };
-     */
+
+    //get by name
+    @GetMapping("/productsName/{name}")
+    Product oneName(@PathVariable String name) {
+        return repository.findByName(name).orElseThrow(() ->  new RuntimeException("Product not found"));
+    }
 }
