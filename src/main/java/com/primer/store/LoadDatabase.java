@@ -17,6 +17,7 @@ public class LoadDatabase {
         return args -> {
             log.info("Nalaganje produkta 1" + repository.save(new Product(1, "Lenovo Legion I5", 1700)));
             log.info("Nalaganje produkta 2" + repository.save(new Product(2, "Lenovo ThinkPad 5", 1200)));
+            log.info("Nalaganje produkta 3" + repository.save(new Product(3, "Bad Laptop", 800)));
         };
     }
 }

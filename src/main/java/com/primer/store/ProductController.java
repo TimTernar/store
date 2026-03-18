@@ -50,4 +50,30 @@ public class ProductController {
     {
         return repository.findByPrice(price).orElseThrow(() -> new RuntimeException("Product not found"));
     }
+
+    @PostMapping("/ProductsAdd")
+    Product newProduct(@RequestBody Product newProduct)
+    {
+        return repository.save(newProduct);
+    }
+
+    @PutMapping("/productsEdit/{id}")
+    Product replaceProcut(@RequestBody Product newProduct, @PathVariable Long id)
+    {
+        return repository.findById(id)
+                .map(product -> {
+                    product.setId(newProduct.getId());
+                    product.setName(newProduct.getName());
+                    product.setPrice(newProduct.getPrice());
+                    return repository.save(product);
+                }).orElseGet(() -> {
+                    return repository.save(newProduct);
+                });
+    }
+
+    @DeleteMapping("/products/{id}")
+    void deleteProduct(@PathVariable Long id)
+    {
+        repository.deleteById(id);
+    }
 }
