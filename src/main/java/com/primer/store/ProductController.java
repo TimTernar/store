@@ -1,9 +1,14 @@
 package com.primer.store;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProductController {
@@ -15,15 +20,17 @@ public class ProductController {
     }
      */
 
-    private List<Product> products = new ArrayList<>(List.of(
-            new Product(1, "Lenovo Legion I5", 1700),
-            new Product(2, "Lenovo ThinkPad 5", 1200)
-    ));
+    private final ProductRepository repository;
+
+    ProductController(ProductRepository repository)
+    {
+        this.repository = repository;
+    }
 
 
     @GetMapping("/productsFull")
     public List<Product> getProcutsFull(){
-        return products;
+        return repository.findAll();
     }
 
     /*
@@ -33,18 +40,4 @@ public class ProductController {
         return prod
     };
      */
-
-    @PostMapping("/productsAdd")
-    public Product add(@RequestBody Product product)
-    {
-        products.add(product);
-        return product;
-    };
-
-    @DeleteMapping("/productDelete/{id}")
-    public String delete(@PathVariable Integer id)
-    {
-        products.removeIf(p -> p.getId() == id);
-        return "Deleted";
-    }
 }
