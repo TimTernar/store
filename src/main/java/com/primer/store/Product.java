@@ -1,5 +1,8 @@
 package com.primer.store;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Product {
     private Integer id;
     private String name;
