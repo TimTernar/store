@@ -1,4 +1,4 @@
-package com.primer.store;
+package com.primer.store.config;
 
 import com.mongodb.client.MongoDatabase;
 import org.springframework.dao.DataAccessException;

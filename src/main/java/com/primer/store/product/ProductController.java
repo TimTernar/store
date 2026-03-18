@@ -1,4 +1,4 @@
-package com.primer.store;
+package com.primer.store.product;
 
 import org.springframework.web.bind.annotation.*;
 
