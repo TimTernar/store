@@ -8,4 +8,6 @@ interface ProductRepository extends JpaRepository<Product, Long>{
 
     Optional<Product> findByName(String name);
 
+    Optional<Product> findByPrice(double price);
+
 }

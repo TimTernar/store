@@ -38,8 +38,16 @@ public class ProductController {
     };
 
     //get by name
+    //methods "findByName" and "findByPrice" are added in ProductRepository
     @GetMapping("/productsName/{name}")
     Product oneName(@PathVariable String name) {
         return repository.findByName(name).orElseThrow(() ->  new RuntimeException("Product not found"));
+    }
+
+    //get by price
+    @GetMapping("/pdocutsPrice/{price}")
+    Product Price(@PathVariable double price)
+    {
+        return repository.findByPrice(price).orElseThrow(() -> new RuntimeException("Product not found"));
     }
 }
